@@ -242,8 +242,10 @@ def _run_query(connection, region_dropdown):
     GROUP BY
         r.region_name,
         s.store_name
+    -- CUSTOM: Show stores with the fewest employees first.
     ORDER BY
-        employee_count DESC;
+        employee_count ASC,
+        s.store_name ASC;
     """
 
     # The question mark is a placeholder.
@@ -285,7 +287,7 @@ def _show_df_table_and_chart(region_dropdown, result_df):
         alt.Chart(result_df)
         .mark_bar()
         .encode(  # ty: ignore[unresolved-attribute]
-            x=alt.X("store_name:N", title="Store", sort="-y"),
+            x=alt.X("store_name:N", title="Store", sort="y"),
             y=alt.Y("employee_count:Q", title="Number of Employees"),
         )
         .properties(

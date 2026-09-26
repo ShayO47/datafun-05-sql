@@ -68,6 +68,17 @@ This project produces the same results in several useful forms.
 
 ![Marimo reactive app preview](docs/images/marimo-local-preview.png)
 
+## First Technical Modification
+
+I changed the retail Marimo SQL query and chart to sort stores from fewest
+employees to most employees. I made this change to focus first on stores with
+the smallest workforces.
+
+I expected the table and chart to reverse their previous order. After running
+the app, I observed that the stores with the fewest employees appeared first.
+This showed me that changing the SQL `ORDER BY` clause affects how results are
+prioritized and interpreted.
+
 ## Important Folders and Files
 
 - **data/*** - raw CSV input files
