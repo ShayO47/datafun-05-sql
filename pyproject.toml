@@ -104,6 +104,7 @@ force-sort-within-sections = true
 "tests/**/*.py" = ["D", "B018"] # Tests need no docstrings; B018 is default-on.
 "notebooks/**/*.py" = ["D", "PLR1711", "RUF059"]   # marimo cells: bare returns + cell-scoped unused vars are the format, not defects
 "src/**/notebook.py" = ["B018", "D", "PLR1711", "RUF059"]   # marimo cells: bare returns + cell-scoped unused vars are the format, not defects
+"src/**/movies_notebook.py" = ["B018", "D", "PLR1711", "RUF059"]
 
 [tool.ruff.lint.pydocstyle] # WHY: Use Google docstring style when D is enabled.
 convention = "google"

@@ -1,7 +1,7 @@
 {
   "version": "1",
   "metadata": {
-    "marimo_version": "0.24.2",
+    "marimo_version": "0.25.0",
     "script_metadata_hash": "20471874d2fd222de3934fcc13ac4583"
   },
   "cells": [
@@ -44,7 +44,7 @@
     },
     {
       "id": "lEQa",
-      "code_hash": "5e4f39873a1051a4ec9a91def3e9a094",
+      "code_hash": "11cf09d59d8d63b66fa91bc8b35be987",
       "outputs": [],
       "console": []
     },
@@ -56,7 +56,7 @@
     },
     {
       "id": "Xref",
-      "code_hash": "5e1b241960b3a1efac75cb87f275344f",
+      "code_hash": "6dc3dfffe02ea08d4e2c863cd1c28d59",
       "outputs": [],
       "console": []
     }
