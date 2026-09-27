@@ -1,82 +1,78 @@
-# Data Card
+# Data Card: MovieLens Rating Explorer
 
-This project provides four data domains for practicing Python and SQL
-with related tables.
+## Dataset Source
 
-## Retail
+This project uses the
+[MovieLens Latest Small Dataset](https://grouplens.org/datasets/movielens/latest/)
+from GroupLens Research.
 
-**Source:** Synthetic data generated for this course.
-The data is designed for practicing SQL joins, grouping,
-filtering, aggregation, and visualization.
+The dataset contains movie information and user rating activity. It is used here
+for educational data analysis.
 
-Files:
+## Purpose
 
-- **region.csv** - one row per business region
-- **store.csv** - one row per store
-- **employee.csv** - one row per employee
-- **sale.csv** - one row per sale
+The purpose of this project is to identify highly rated movies while considering
+how many user ratings support each result.
 
-Relationships:
+A movie with a high average rating from only a few users may be less reliable
+than a similarly rated movie supported by many users. The interactive app lets
+the user choose a minimum rating-count threshold before viewing results.
 
-- region → store → employee
-- A region has many stores (1:M).
-- A store has many employees (1:M).
-- A store can also have many sales (1:M).
+## Records and Grain
 
-## Library
+The project uses two related tables:
 
-**Source:** Synthetic data generated for this course.
-The data is designed for practicing SQL joins, grouping,
-filtering, aggregation, and visualization.
+- `movies.csv`: one row represents one movie.
+- `ratings.csv`: one row represents one user's rating of one movie.
 
-Files:
+The tables are connected with the `movieId` column.
 
-- **state.csv** - one row per state
-- **branch.csv** - one row per library branch
-- **book.csv** - one row per book
-- **review.csv** - one row per book review
+## Variables Used
 
-Relationships:
+### movies.csv
 
-- state → branch → book → review
+| Variable | Description |
+| --- | --- |
+| `movieId` | Unique identifier for each movie |
+| `title` | Movie title and release year |
+| `genres` | One or more genres assigned to the movie |
 
-## Medical Informatics
+### ratings.csv
 
-**Source:** Synthetic data generated for this course.
-No records represent real patients or healthcare encounters.
-The data is designed for practicing SQL with related
-healthcare-style data without using real patient information.
+| Variable | Description |
+| --- | --- |
+| `userId` | Identifier for the user who submitted a rating |
+| `movieId` | Identifier connecting the rating to a movie |
+| `rating` | User's rating of the movie |
+| `timestamp` | Time the rating was recorded |
 
-Files:
+## Processing and Analysis
 
-- **clinic.csv** - one row per clinic
-- **patient.csv** - one row per synthetic patient
-- **visit.csv** - one row per visit
-- **lab_result.csv** - one row per lab result
+The Marimo app loads both CSV files into an in-memory SQLite database.
 
-Relationships:
+SQL joins the `movies` and `ratings` tables using `movieId`. The query then:
 
-- clinic → patient → visit → lab_result
+1. counts the ratings for each movie;
+2. calculates each movie's average rating;
+3. filters movies using the selected minimum rating count;
+4. sorts the results by average rating;
+5. returns the top ten qualifying movies.
 
-## MovieLens
+## Results
 
-**Source:** MovieLens Latest Small dataset from GroupLens Research.
-The dataset was last updated in September 2018. :contentReference[oaicite:0]{index=0}
+With a minimum of 50 ratings, *The Shawshank Redemption (1994)* had the
+highest average rating: 4.43 out of 5 from 317 ratings.
 
-MovieLens Latest datasets may change over time and are not intended
-for reporting research results. :contentReference[oaicite:1]{index=1}
+Increasing the threshold to 100 ratings removed movies with fewer than 100
+ratings from the ranking and replaced them with movies supported by more user
+feedback.
 
-The dataset contains approximately:
+## Limitations
 
-- 100,000 movie ratings
-- 3,600 tag applications
-- 9,000 movies
-- 600 users
-
-### Source and documentation
-
-MovieLens Latest Datasets
-<https://grouplens.org/datasets/movielens/latest/>
-
-This project uses MovieLens for learning and practicing
-data analysis with related tables.
+- The dataset represents MovieLens user activity, not all movie viewers.
+- User IDs do not provide demographic information about the people who rated
+  the movies.
+- Average ratings are opinions from MovieLens users, not objective measures of
+  movie quality.
+- A higher minimum rating count provides more supporting evidence, but it may
+  exclude highly rated movies with fewer ratings.

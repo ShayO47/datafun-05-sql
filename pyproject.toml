@@ -16,7 +16,7 @@ name = "datafun-05-sql" # CUSTOM: Package distribution name (use lowercase and d
 readme = "README.md"
 requires-python = ">=3.14"
 version = "1.1.0"
-description = "Shalynne Orth's relational data and SQL analytics project with a reactive Marimo app."
+description = "Shalynne Orth's interactive MovieLens rating analysis using SQLite, SQL, Python, and Marimo."
 authors = [{ name = "Shalynne Orth" }]
 
 dependencies = [

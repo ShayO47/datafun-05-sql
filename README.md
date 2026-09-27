@@ -35,57 +35,79 @@ so it can be used in further analysis.
 
 ## This Project
 
-This project introduces **relational data and SQL**
-used when storing structured data in tables.
-Analysts are typically highly skilled at both SQL and Python.
+This project is a MovieLens rating explorer created by Shalynne Orth.
+It uses SQLite, SQL, Python, and a reactive Marimo app to answer this question:
 
-Sample datasets are provided in the `data/raw` folder
-across several topic domains:
+> Which movies have the highest average user ratings when they have enough
+> ratings to make the result meaningful?
 
-- **retail** - with regions / stores / employees (the worked example)
-- **library** - with state / branch / books
-- **health** - with clinic / patient / visit
-- **movies** - using the **MovieLens** small dataset
+The project loads two related CSV files:
 
-Each domain has related tables.
-Run the retail example,
-and implement a similar project either by expanding the retail work,
-or choosing one of the other recommended domains.
+* `movies.csv` contains one record per movie, including its title and genres.
+* `ratings.csv` contains one record per user rating.
 
-## Produced Artifacts
+SQL joins the tables using `movieId`, calculates each movie's average rating,
+counts its ratings, and returns the top ten movies that meet a user-selected
+minimum rating-count threshold.
 
-This project produces the same results in several useful forms.
+## Run the MovieLens Explorer
 
-- [**Reactive App (marimo)**](https://shayO47.github.io/datafun-05-sql/app/)
-  - run the analysis interactively in a browser
+From the project root folder in a VS Code terminal:
 
-- [**Reactive Notebook (marimo)**](./src/datafun/notebook.py)
-  - view the Python source used to create the reactive app
+```shell
+uv sync
+uv run marimo run src/datafun/movies_notebook.py
+```
 
-## Initial Results
+Open the local URL shown in the terminal. Use the slider to select a minimum
+number of ratings and watch the table and bar chart update automatically.
 
-![One analyst-selected chart](docs/images/first-chart.png)
+The notebook source is available in
+[`src/datafun/movies_notebook.py`](./src/datafun/movies_notebook.py).
 
-![Marimo reactive app preview](docs/images/marimo-local-preview.png)
+## Results and Analyst Insight
 
-## First Technical Modification
+At a minimum of 50 ratings, *The Shawshank Redemption (1994)* had the highest
+average user rating: 4.43 out of 5 from 317 ratings.
 
-I changed the retail Marimo SQL query and chart to sort stores from fewest
-employees to most employees. I made this change to focus first on stores with
-the smallest workforces.
+| Movie                           | Rating count | Average rating |
+| ------------------------------- | -----------: | -------------: |
+| The Shawshank Redemption (1994) |          317 |           4.43 |
+| The Godfather (1972)            |          192 |           4.29 |
+| Fight Club (1999)               |          218 |           4.27 |
 
-I expected the table and chart to reverse their previous order. After running
-the app, I observed that the stores with the fewest employees appeared first.
-This showed me that changing the SQL `ORDER BY` clause affects how results are
+![Top-rated MovieLens movies with at least 50 ratings](docs/images/movielens-top-rated-50.png)
+
+When I increased the threshold from 50 to 100 ratings, *Dr. Strangelove*,
+*Cool Hand Luke*, and *Rear Window* no longer qualified because they had fewer
+than 100 ratings. They were replaced by movies supported by more user ratings.
+
+This shows that the rating-count threshold changes the evidence required for a
+movie to appear in the ranking. A higher threshold favors results supported by
+a larger amount of audience feedback, although it does not prove that one movie
+is objectively better than another.
+
+## Data Source
+
+This project uses the
+[MovieLens Latest Small Dataset](https://grouplens.org/datasets/movielens/latest/).
+The dataset is used for educational analysis and includes movie information and
+user rating activity.
+
+## Earlier Technical Modification
+
+Before applying the project to MovieLens data, I changed the retail example's
+SQL query and chart to sort stores from fewest employees to most employees.
+This helped me learn how an SQL `ORDER BY` clause changes how results are
 prioritized and interpreted.
 
 ## Important Folders and Files
 
-- **data/*** - raw CSV input files
-- **artifacts/** - generated database files, logs, or reports
-- **docs/** - project narrative and documentation
-- **src/datafun/** - project logic
-- **zensical.toml** - update documentation site metadata
+* **data/** - raw CSV input files
+* **artifacts/** - generated database files, logs, or reports
+* **docs/** - project narrative and documentation
+* **src/datafun/** - project logic
+* **zensical.toml** - update documentation site metadata
 
 ## Common Workflow
 
@@ -169,10 +191,10 @@ uv run python -m datafun.app
 
 # run marimo nb as a reactive app
 # press Ctrl + C in the terminal to exit
-uv run marimo run src/datafun/notebook.py
+uv run marimo run src/datafun/movies_notebook.py
 
 # Or: run marimo nb as a notebook
-uv run marimo edit src/datafun/notebook.py
+uv run marimo edit src/datafun/movies_notebook.py
 
 # do chores
 uv run ruff format .
@@ -195,18 +217,18 @@ git push -u origin main
 
 ## Helpful Tips
 
-- Use the **UP ARROW** and **DOWN ARROW** in the terminal
+* Use the **UP ARROW** and **DOWN ARROW** in the terminal
   to scroll through past commands.
-- Use `CTRL+f` to find (and replace) text within a file.
+* Use `CTRL+f` to find (and replace) text within a file.
 
 ## Much Can Be Ignored
 
-- You do not need to add to or modify `tests/`.
+* You do not need to add to or modify `tests/`.
   Tests are recommended and provided for example only.
-- Many files are silent helpers.
+* Many files are silent helpers.
   [Explore](https://denisecase.github.io/professional-python-project-explainer/)
   as you like, but most files are never touched.
-- You do NOT need to understand everything;
+* You do NOT need to understand everything;
   let understanding build over time.
 
 ## As Needed
@@ -231,19 +253,19 @@ Press `Ctrl c` (both keys together) or `Ctrl+Z` then `Enter` on Windows.
 
 ## Documentation
 
-- [Documentation](https://shayO47.github.io/datafun-05-sql/)
+* [Documentation](https://shayO47.github.io/datafun-05-sql/)
 
 ## Data Card
 
-- [Palmer Penguins Data Card](./docs/data-card.md)
+* [MovieLens Data Card](./docs/data-card.md)
 
 ## Annotations
 
-- [.annotations/annotations.md](./.annotations/annotations.md)
+* [.annotations/annotations.md](./.annotations/annotations.md)
 
 ## Citation
 
-- [CITATION.cff](./CITATION.cff)
+* [CITATION.cff](./CITATION.cff)
 
 ## License
 

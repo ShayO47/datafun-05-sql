@@ -1,37 +1,50 @@
-# Project Documentation
+# MovieLens SQL Rating Explorer
 
-> Use this hosted documentation site to tell your
-> data story. Include a narrative telling your
-> results, observations, and interpretations.
-> Display visuals as needed for a compelling story.
+> An interactive SQL analysis of MovieLens user ratings by Shalynne Orth.
 
-## Professional Workflow
+## Project Overview
 
-See [**Workflow B: Apply Example Project**](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
-to get a project like this running on your machine.
+This project uses SQLite, SQL, Python, and a reactive Marimo app to explore
+MovieLens movie ratings.
 
-## Documentation Index
+The project asks:
 
-- **Home** - this landing page
-- [**Project Instructions**](./project-instructions.md)
-- [**Concepts**](./concepts.md)
-- [**Data Card**](./data-card.md)
-- [**API**](./api.md)
+> Which movies have the highest average user ratings when they have enough
+> ratings to make the result meaningful?
 
-## Initial Results
+The app joins the `movies.csv` and `ratings.csv` tables using `movieId`.
+Users can choose a minimum number of ratings with a slider, then view the ten
+highest-rated qualifying movies in a table and bar chart.
 
-After reviewing the related tables in your chosen domain,
-use the code in the **src/datafun**
-folder to get them in a database so we can use SQL to
-join and query the related tables.
+## Key Results
 
-![One analyst-selected chart](./images/first-chart.png)
+With a minimum of 50 ratings, *The Shawshank Redemption (1994)* was the
+highest-rated qualifying movie, with an average rating of **4.43 out of 5**
+from **317 ratings**.
 
-![Marimo reactive app preview](./images/marimo-local-preview.png)
+| Movie | Rating count | Average rating |
+| --- | ---: | ---: |
+| The Shawshank Redemption (1994) | 317 | 4.43 |
+| The Godfather (1972) | 192 | 4.29 |
+| Fight Club (1999) | 218 | 4.27 |
 
-## Produced Artifacts
+![Top-rated MovieLens movies with at least 50 ratings](./images/movielens-top-rated-50.png)
 
-This project produces the same results in several useful forms.
+## Analyst Insight
 
-- [**Reactive App (marimo)**](https://denisecase.github.io/datafun-05-sql/app/)
-  - run the analysis interactively in a browser
+Increasing the minimum rating count from 50 to 100 removed movies that had
+fewer than 100 ratings from the top-ten ranking. The revised list emphasized
+movies supported by more audience feedback.
+
+This demonstrates that the rating-count threshold changes the amount of
+evidence required for a movie to appear in the results. A higher threshold
+makes the ranking less influenced by a small number of ratings, although it
+does not make the results an objective measure of movie quality.
+
+## Run the Interactive App
+
+From the project root folder, run:
+
+```shell
+uv sync
+uv run marimo run src/datafun/movies_notebook.py

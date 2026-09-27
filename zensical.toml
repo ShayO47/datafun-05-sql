@@ -9,11 +9,11 @@
 # WHY: Centralizes project documentation configuration.
 
 [project]
-site_name = "DataFun 05 SQL Analytics"
+site_name = "MovieLens SQL Rating Explorer"
 site_url = "https://shayO47.github.io/datafun-05-sql/"
 repo_url = "https://github.com/ShayO47/datafun-05-sql"
 repo_name = "ShayO47/datafun-05-sql"
-site_description = "Shalynne Orth's relational data and SQL analytics project."
+site_description = "Shalynne Orth's interactive SQL analysis of MovieLens user ratings."
 docs_dir = "docs" # source directory for documentation markdown files
 site_dir = "site" # output directory for generated site (ignored by Git; not in repo)
 edit_uri = "edit/main/docs/" # "Edit this page" links (GitHub)
