@@ -1,4 +1,4 @@
-# datafun-05-sql
+# MovieLens SQL Rating Explorer
 
 [![Workflow Guide](https://img.shields.io/badge/Pro--Guide-pro--analytics--02-green)](https://denisecase.github.io/pro-analytics-02/workflow-b-apply-example-project/)
 [![Python 3.14](https://img.shields.io/badge/python-3.14%2B-blue?logo=python)](./pyproject.toml)
@@ -125,16 +125,8 @@ Working through issues is part of implementing professional projects.
 
 ## Success
 
-After completing Phase 1. **Start & Run**, you'll have the example project,
-running on your machine.
-A new file `project.log` will appear in the root project folder
-and running the example script will print out:
-
-```shell
-===================================
-END main() - Executed successfully!
-===================================
-```
+The MovieLens Explorer runs successfully when Marimo opens a local URL,
+displays the rating-count slider, and updates the table and bar chart.
 
 ## Command Reference
 
@@ -186,7 +178,7 @@ uv run pre-commit run --all-files
 git add -A
 uv run pre-commit run --all-files
 
-# run the Python module
+# run the Python module (optional - marimo is the main goal of this project)
 uv run python -m datafun.app
 
 # run marimo nb as a reactive app
